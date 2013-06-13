@@ -5,29 +5,12 @@ float currentY;
 int outputW, outputH;
 
 void setup() {
-  outputW = 5100;
-  outputH = 3300;
+  outputW = displayWidth;
+  outputH = displayHeight;
   background(255);
   source = loadImage("bitmap/source.jpg");
   source.resize(outputW, outputH);
-  int appW, appH;
-  if (outputW >= outputH) {
-    appW = displayWidth;
-    appH = outputH * (outputW / source.width);
-  } 
-  else {
-    appH = displayHeight;
-    appW = outputW * (outputH / source.height);
-  }
-
-  //  int appW = (outputW >= outputH) ? displayWidth : displayWidth * (outputW/displayWidth);
-  //  int appH = (outputH >= outputW) ? displayHeight : displayHeight * (outputH/displayHeight);
-
-  println(appW);
-  println(appH);
-
-
-  size(appW, appH);
+  size(outputW, outputH);
   canvas = createGraphics(width, height);
   loadVectors("ornaments", true);
 }
@@ -52,22 +35,22 @@ void update() {
   shape.disableStyle();
   shape.rotate(random(PI));
   float scaleFactor;
-  if (random(1) > 0.2) {
+  if (random(1) > 0.9) {
     scaleFactor = random(0.25, 0.50);
   }
   else {
-    scaleFactor = random(4, 10);
+    scaleFactor = random(60, 100);
   }
   canvas.strokeWeight(0.25/scaleFactor);
   if (random(1) > 0.35) {
     canvas.fill(c);
   } 
   else {
-    canvas.fill(255);
+    //canvas.fill(255);
   }
 
   canvas.shape(shape, width/2 + random(600), currentY);
-  currentY += random(30);
+  currentY += random(2);
   if (currentY > height) {
     frame.setTitle("Done!");
     noLoop();
